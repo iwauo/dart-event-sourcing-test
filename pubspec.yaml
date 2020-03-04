@@ -8,9 +8,10 @@ environment:
 dependencies:
   logging: ^0.11.4
   dart_event_sourcing:
-    git:
-      url: git://github.com/iwauo/dart-event-sourcing.git
-      ref: a9df468e9e017d22ee1df49be0c374f90cf5648e
+    path: ../dart-event-sourcing
+#     git:
+#       url: git://github.com/iwauo/dart-event-sourcing.git
+#       ref: a9df468e9e017d22ee1df49be0c374f90cf5648e
 
 dev_dependencies:
   test: '^1.12.0'

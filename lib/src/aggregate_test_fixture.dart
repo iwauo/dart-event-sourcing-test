@@ -1,44 +1,47 @@
-import 'dart:mirrors';
 import 'package:dart_event_sourcing/commandhandling.dart';
 import 'package:dart_event_sourcing/eventhandling.dart';
-import 'package:dart_event_sourcing/modeling.dart';
 
-class AggregateTestFixture<T extends Aggregate> {
-  T Function() aggregateProvider;
+class AggregateTestFixture<T> {
   CommandBus commandBus;
   EventStore eventStore;
-  T aggregate;
+  T Function() aggregateProvider;
 
-  AggregateTestFixture({
+  AggregateTestFixture(
+    T Function() aggregateProvider, {
     CommandBus commandBus,
     EventStore eventStore,
   }) {
-    this.aggregate = reflectClass(T).newInstance(Symbol(""), []).reflectee as T;
+    this.aggregateProvider = aggregateProvider;
     this.commandBus = commandBus ?? SimpleCommandBus();
     this.eventStore = eventStore ?? InMemoryEventStore();
   }
 
   TestExecutor<T> givenNoPriorActivity() {
-    return TestExecutor();
+    return TestExecutor(aggregateProvider());
   }
 
   TestExecutor<T> given(List<dynamic> events) {
-    return TestExecutor();
+    return TestExecutor(aggregateProvider());
   }
 }
 
-class TestExecutor<T extends Aggregate> {
+class TestExecutor<T> {
+  T aggregate;
+  TestExecutor(this.aggregate);
   ResultValidator<T> when(dynamic command) {
-    return ResultValidator();
+    return ResultValidator(aggregate);
   }
 }
 
-class ResultValidator<T extends Aggregate> {
+class ResultValidator<T> {
+  T aggregate;
+  ResultValidator(this.aggregate);
   ResultValidator<T> expectEvents(List<dynamic> events) {
     return this;
   }
 
   ResultValidator<T> expectState(void Function(T aggregate) stateValidator) {
+    stateValidator(aggregate);
     return this;
   }
 }

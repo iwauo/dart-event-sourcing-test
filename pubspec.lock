@@ -81,11 +81,9 @@ packages:
   dart_event_sourcing:
     dependency: "direct main"
     description:
-      path: "."
-      ref: a9df468e9e017d22ee1df49be0c374f90cf5648e
-      resolved-ref: a9df468e9e017d22ee1df49be0c374f90cf5648e
-      url: "git://github.com/iwauo/dart-event-sourcing.git"
-    source: git
+      path: "../dart-event-sourcing"
+      relative: true
+    source: path
     version: "1.0.0"
   dynamic_properties:
     dependency: transitive
