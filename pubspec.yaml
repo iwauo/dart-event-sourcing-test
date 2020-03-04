@@ -1,0 +1,16 @@
+name: dart_event_sourcing_test
+description:
+  A test utilities for projects using the dart-event-sourcing library.
+version: '1.0.0'
+environment:
+  sdk: '>=2.0.0 <3.0.0'
+
+dependencies:
+  logging: ^0.11.4
+  dart_event_sourcing:
+    git:
+      url: git://github.com/iwauo/dart-event-sourcing.git
+      ref: a9df468e9e017d22ee1df49be0c374f90cf5648e
+
+dev_dependencies:
+  test: '^1.12.0'
